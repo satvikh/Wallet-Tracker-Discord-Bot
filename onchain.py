@@ -64,7 +64,7 @@ def get_gas_prices():
 def add_wallet(nickname, wallet):
     wallet=addressCheck(wallet)
     with open('walletList.txt', 'a') as f:
-        f.write(f'{nickname} ; {wallet} ','\n')
+        f.write(f'{nickname} ; {wallet} '+'\n')
 
 #removes a wallet from the list of wallets to track
 def remove_wallet(nickname):

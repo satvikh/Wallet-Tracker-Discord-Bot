@@ -42,6 +42,24 @@ async def on_message(message):
 
 #stores a certain wallet to track
     if message.content.startswith('$track'):
-        await message.channel.reply
+        
+    #add a wallet to the list of wallets to track
+        await message.channel.send('Enter the wallet address you would like to track')
+        msg=await client.wait_for('message', timeout=60)
+        wallet_address=msg.content
+
+    #add a nickname to the wallet
+        await message.channel.send('Enter the nickname you would like to give this wallet')
+        msg=await client.wait_for('message', timeout=60)
+        nickname=msg.content
+        
+        try:
+            print(onchain.add_wallet(nickname, wallet_address))
+            await message.channel.send(f'{nickname} has been added to the list of wallets to track')
+        except:
+            await message.channel.send('There was an error adding the wallet to the list of wallets to track')
+        
+
+
 
 client.run(BOT_TOKEN)
