@@ -9,6 +9,10 @@ from ens import ENS
 load_dotenv()
 BASE_URL='https://api.etherscan.io/api'
 API_KEY=os.getenv('ETHERSCAN_API_KEY')
+infura_url=os.getenv('INFURA_URL')
+
+#setting up connection to ETH network
+web3=Web3(Web3.HTTPProvider(infura_url))
 
 
 #convert from ens to address
@@ -53,6 +57,9 @@ def get_gas_prices():
     return [data['result']['SafeGasPrice'], data['result']['ProposeGasPrice'], data['result']['FastGasPrice'], data['result']['suggestBaseFee']]
 
 
-"""def add_wallet(address, nickname):
-    if """
+#adds a wallet to the list of wallets to track
+def add_wallet(nickname, wallet):
+    #wallet=addressCheck(wallet)
+    with open('walletList.txt', 'a') as f:
+        f.write(f'{nickname} ; {wallet} ','\n')
 
