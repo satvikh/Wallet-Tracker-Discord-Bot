@@ -62,9 +62,17 @@ def get_gas_prices():
 
 #adds a wallet to the list of wallets to track
 def add_wallet(nickname, wallet):
-    #wallet=addressCheck(wallet)
+    wallet=addressCheck(wallet)
     with open('walletList.txt', 'a') as f:
         f.write(f'{nickname} ; {wallet} ','\n')
 
-
-print(addressCheck('vitalik.eth'))
+#removes a wallet from the list of wallets to track
+def remove_wallet(nickname):
+    with open('walletList.txt', 'r') as f:
+        lines=f.readlines()
+        for line in lines:
+            if nickname in line:
+                lines.remove(line)
+    with open('walletList.txt', 'w') as f:
+        for line in lines:
+            f.write(line)
