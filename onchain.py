@@ -1,7 +1,7 @@
 from dotenv import load_dotenv 
 import os
 import requests
-from web3 import Web3
+from web3 import Web3, IPCProvider
 from ens import ENS
 
 
@@ -9,18 +9,21 @@ from ens import ENS
 load_dotenv()
 BASE_URL='https://api.etherscan.io/api'
 API_KEY=os.getenv('ETHERSCAN_API_KEY')
+
 infura_url=os.getenv('INFURA_URL')
 
 #setting up connection to ETH network
 web3=Web3(Web3.HTTPProvider(infura_url))
 
+#setting up ENS helper
+ns = ENS.from_web3(web3)
 
 #convert from ens to address
-"""def addressCheck(wallet):
+def addressCheck(wallet):
     if '.eth' in wallet:
-        addy=ns.resolver(wallet)
+        address=ns.address(wallet)
 
-        return addy.address"""
+        return address
 
 
 
@@ -63,3 +66,5 @@ def add_wallet(nickname, wallet):
     with open('walletList.txt', 'a') as f:
         f.write(f'{nickname} ; {wallet} ','\n')
 
+
+print(addressCheck('vitalik.eth'))
