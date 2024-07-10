@@ -54,12 +54,22 @@ async def on_message(message):
         nickname=msg.content
         
         try:
-            print(onchain.add_wallet(nickname, wallet_address))
+            onchain.add_wallet(nickname, wallet_address)
             await message.channel.send(f'{nickname} has been added to the list of wallets to track')
         except:
             await message.channel.send('There was an error adding the wallet to the list of wallets to track')
-        
 
+
+#Removes a wallet from the list of wallets to track
+    if message.content.startswith('$untrack'):
+        await message.channel.send('Enter the nickname of the wallet you would like to remove from the list of tracked wallets')
+        msg=await client.wait_for('message', timeout=60)
+        nickname=msg.content
+        try:
+            onchain.remove_wallet(nickname)
+            await message.channel.send(f'{nickname} has been removed from the list of tracked wallets')
+        except:
+            await message.channel.send('There was an error removing the wallet from the list of tracked wallets')
 
 
 client.run(BOT_TOKEN)

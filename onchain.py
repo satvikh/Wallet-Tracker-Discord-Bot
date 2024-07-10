@@ -73,6 +73,7 @@ def remove_wallet(nickname):
         for line in lines:
             if nickname in line:
                 lines.remove(line)
+                
     with open('walletList.txt', 'w') as f:
         for line in lines:
             f.write(line)
