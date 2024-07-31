@@ -2,7 +2,8 @@ import discord
 from dotenv import load_dotenv
 import os
 import onchain
-
+import asyncio
+import time
 
 #initializing variables and loading the .env file
 load_dotenv()
@@ -70,6 +71,8 @@ async def on_message(message):
             await message.channel.send(f'{nickname} has been removed from the list of tracked wallets')
         except:
             await message.channel.send('There was an error removing the wallet from the list of tracked wallets')
+
+
 
 
 client.run(BOT_TOKEN)

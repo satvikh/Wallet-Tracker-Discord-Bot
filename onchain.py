@@ -3,6 +3,7 @@ import os
 import requests
 from web3 import Web3, IPCProvider
 from ens import ENS
+import asyncio
 
 
 #initializing variables and loading the .env file
@@ -77,3 +78,30 @@ def remove_wallet(nickname):
     with open('walletList.txt', 'w') as f:
         for line in lines:
             f.write(line)
+
+
+
+"""def handle_event(event):
+    print("New transaction detected")
+    print(f"Transaction hash: {event['transactionHash'].hex()}")
+    print(f"From: {event['args']['from']}")
+    print(f"To: {event['args']['to']}")
+    print(f"Value: {web3.fromWei(event['args']['value'], 'ether')} ETH")
+
+def log_loop(event_filter, poll_interval):
+    while True:
+        for event in event_filter.get_new_entries():
+            handle_event(event)
+        time.sleep(poll_interval)
+
+def main():
+    # Create a filter for new transactions to the specific wallet address
+    tx_filter = web3.eth.filter({
+        "address": wallet_address
+    })
+
+    # Start the event loop
+    log_loop(tx_filter, 2)
+
+if __name__ == "__main__":
+    main()"""
